@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+	
+<h:head>
+	<title>Principal</title>
+</h:head>
+
+<h:body>
+	<ui:decorate template="/padrao.xhtml">
+		<ui:define name="centro">
+			<h:form id="formNewProduto">
+				<p:growl id="growl" showDetail="true" />
+				<h:panelGrid columns="3">
+				
+					<p:outputLabel for="descricao" value="Descrição: "/>
+					<p:inputText id="descricao" value="#{newProductBean.produto.descricao}" required="true"/>
+					<p:outputLabel></p:outputLabel>
+					
+					<p:outputLabel for="descricao" value="Preço: "/>
+					<p:inputText id="preco" value="#{newProductBean.produto.preco}" required="true"/>
+					<p:outputLabel></p:outputLabel>
+					
+					<p:outputLabel></p:outputLabel>
+					<p:commandButton action="#{newProductBean.save}" update=":formNewProduto:growl, :formNewProduto" value="Salvar"/>
+					<p:outputLabel></p:outputLabel>
+					
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+	
+</html>

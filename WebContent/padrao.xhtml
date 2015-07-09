@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<f:view contentType="text/html">
+	<h:head>
+		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/favicon_.ico"/>
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputScript library="js" name="locale.js" />
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title></title>
+		</f:facet>
+
+	</h:head>
+
+	<h:body>
+		<p:layout fullPage="true">
+			
+			<!--
+			<p:layoutUnit id="top" position="north" size="100" resizable="true">				
+				<div aling="right">
+					<h:form>
+					<h:commandLink action="/restrict/main.xhtml" value="" >
+						<h:graphicImage value="/resources/images/logo.png"  title="Sistema de Aproveitamento de Disciplinas" />
+					</h:commandLink>
+					</h:form> 
+				</div>
+			</p:layoutUnit>
+			-->
+			 
+			<p:layoutUnit id="left" position="west"  resizable="true"
+				collapsible="true" header="Opções" minSize="200">
+				<h:form>
+					<p:menu  >
+						<p:separator />
+
+						<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_ROOT">
+							<p:submenu label="Administrador">
+								<p:menuitem value=" Início" icon="ui-icon-home" url="/restrict/main.xhtml" />
+								<p:menuitem value=" Novo Produto" icon="ui-icon-plus" url="#{newProductBean.newPage()}" />
+								<p:menuitem value=" Produtos" icon="ui-icon-plus" url="#{listProductBean.newPage()}" />
+								<p:menuitem value=" Usuários" icon="ui-icon-person" url="#{managerUsersBean.newPage()}" />
+							</p:submenu>
+						</sec:ifAnyGranted>
+						
+						<p:separator></p:separator>
+						<p:submenu label="Usuário">
+							<p:menuitem value="Conta" icon="ui-icon-wrench" />
+							<p:menuitem value="Sair" icon="ui-icon-extlink" url="#{request.contextPath}/j_spring_security_logout" />
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</p:layoutUnit>
+
+
+			<p:layoutUnit id="center" position="center" header="ERP Service">
+				<center>
+					<ui:insert name="centro">
+	                        O que estiver aqui será substituido!
+	                </ui:insert>
+				</center>
+			</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</f:view>
+</html>

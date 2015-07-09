@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+	
+<h:head>
+	<title>Nova Empresa</title>
+</h:head>
+
+<h:body>
+	<ui:decorate template="/padrao.xhtml">
+		<ui:define name="centro">
+			<h:form id="formNewEnterprise">
+				<p:growl sticky="true" showDetail="true" showSummary="true" id="growl"></p:growl>
+				<p:wizard backLabel="Voltar" nextLabel="Avançar">
+					<p:tab id="tabEmpresa" title="1">
+						<p:panel header="Empresa">
+							<p:messages/>
+							<h:panelGrid columns="2" cellpadding="2">
+								<p:outputLabel value="Razão Social*"></p:outputLabel>
+								<p:inputText value="#{newEnterpriseBean.empresa.razaoSocial}" required="true" id="razao"></p:inputText>
+								<p:outputLabel value="Fantasia*"></p:outputLabel>
+								<p:inputText value="#{newEnterpriseBean.empresa.fantasia}" required="true" id="fantasia"></p:inputText>					
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+					
+					<p:tab id="tabUser" title="2">
+						<p:panel header="Usuário">
+							<p:messages/>
+							<p:outputLabel value="#{newEnterpriseBean.empresa.fantasia}"/>
+							<br/>
+							<h:panelGrid columns="3" cellpadding="2">
+								<p:outputLabel value="Nome*"></p:outputLabel>
+								<p:inputText value="#{newEnterpriseBean.usuario.nome}" required="true" id="nome"></p:inputText>
+								<p:outputLabel></p:outputLabel>
+								
+								<p:outputLabel value="E-mail*"></p:outputLabel>
+								<p:inputText value="#{newEnterpriseBean.usuario.email}" required="true" id="email">
+									<p:ajax event="blur" update="img" listener="#{newEnterpriseBean.blur}"/>
+								</p:inputText>
+								<p:graphicImage value="/resources/images/#{newEnterpriseBean.validaEmail}.gif" id="img" />
+								
+								<p:outputLabel value="Senha*"></p:outputLabel>
+								<p:inputText value="#{newEnterpriseBean.usuario.senha}" required="true" id="senha"></p:inputText>
+								<p:outputLabel></p:outputLabel>
+								
+								<p:outputLabel></p:outputLabel>
+								<p:commandButton value="Cadastrar" action="#{newEnterpriseBean.saveEnterprise}"></p:commandButton>
+								<p:outputLabel></p:outputLabel>
+													
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+				</p:wizard>
+				
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+	
+</html>

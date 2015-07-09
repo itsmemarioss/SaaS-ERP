@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Login - Sistema</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head> 
+<h:body> 
+
+	<div align="center">
+		
+		<h:panelGroup rendered="#{!empty param.login_erro}">
+				<span style="font-color: red"> Erro ao efetuar o login.</span>
+				<br />
+				Motivo: #{SPRING_SECURITY_LAST_EXCEPTION.message}
+		</h:panelGroup>
+	</div>
+	
+	<div id="wrapper">
+		<div id="wrappertop"></div>
+
+		<form id="login" method="post" action="${request.contextPath}/j_spring_security_check">
+			<div id="wrappermiddle">
+
+				<h2>Login</h2>
+				<div id="username_input">
+					<div id="username_inputleft"></div>
+					<div id="username_inputmiddle">
+						<input type='text' name='j_username' id="url" />
+						<img id="url_user" src="#{request.contextPath}/resources/images/mailicon.png" alt="" />				
+					</div>
+					<div id="username_inputright"></div>
+				</div>
+				
+				<div id="password_input">
+					<div id="password_inputleft"></div>
+					<div id="password_inputmiddle">
+						<input type='password' name='j_password' id="url" />
+						<img id="url_password" src="#{request.contextPath}/resources/images/passicon.png" alt=""/>
+					</div>
+					<div id="password_inputright"></div>
+				</div>
+				
+				<div id="submit">
+					<input type="checkbox" name="_spring_security_remember_me" />Lembrar-me!
+					<br/><br/>
+					<input type="submit" value="Entrar" 
+						   id="submit1" style="background:url(#{request.contextPath}/resources/images/submit_2.png)"/>
+				</div>
+				
+				<br/>
+				<div id="links_left"><a href="#">Esqueceu a senha?</a></div>
+				<div id="links_right"><a href="#{request.contextPath}#{newEnterpriseBean.novo()}">Não cadastrado ainda?</a></div>
+				
+			</div>
+			
+		</form>
+		<div id="wrapperbottom"></div>
+		<div id="powered"><p> by <a href="http://www.mkldev.com.br">MKL Developers</a></p></div>
+		
+	</div>
+	
+	<br/>
+	
+	<script>
+		document.getElementById("login").j_username.value = "#{SPRING_SECURITY_LAST_USERNAME}";
+	</script>
+</h:body> 
+</html>

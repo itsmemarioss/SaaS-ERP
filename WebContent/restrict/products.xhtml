@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+	
+<h:head>
+	<title>Produtos Cadastrados</title>
+</h:head>
+
+<h:body>
+	<ui:decorate template="/padrao.xhtml">
+		<ui:define name="centro">
+			<h:form id="formProducts">
+				<p:growl id="growl" showDetail="true" />
+				
+				<p:commandButton value="Relatório" icon="ui-icon-arrowthickstop-1-s" ajax="false">
+					<p:fileDownload value="#{listProductBean.getReport()}"/>
+				</p:commandButton>
+				
+				<p:panel header="Produtos Cadastrados">
+					<p:dataTable id="tbProducts" widgetVar="tbProducts" value="#{listProductBean.list}" var="product" filteredValue="#{listProductBean.list}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" emptyMessage="Nenhum registro encontrado" paginator="true" rows="10" 
+						sortBy="#{product.descricao}">
+						
+						<p:column headerText="Código" filterBy="#{product.id}" sortBy="#{product.id}" filterMatchMode="contains">
+							<center>
+								#{product.id}
+							</center>
+						</p:column>
+						
+						<p:column headerText="Descrição" filterBy="#{product.descricao}" sortBy="#{product.descricao}" filterMatchMode="contains">
+							<center>
+								#{product.descricao}
+							</center>
+						</p:column>
+						
+						<p:column headerText="preco" filterBy="#{product.preco}" sortBy="#{product.preco}" filterMatchMode="contains">
+							<center>
+								#{product.preco}
+							</center>
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+	
+</html>
